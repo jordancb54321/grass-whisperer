@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; image?: string; type?: 'website' | 'article'; structuredData?: Record<string, unknown> | Record<string, unknown>[]; }
+const { title, description, image = '/og-default.svg', type = 'website', structuredData } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+const fullTitle = title === 'Grass Whisperer' ? title : `${title} | Grass Whisperer`;
+const nav = [
+  { href: '/guides/grass-seed/', label: 'Seed' }, { href: '/guides/fertiliser/', label: 'Feeding' },
+  { href: '/guides/watering/', label: 'Watering' }, { href: '/guides/levelling-a-lawn/', label: 'Levelling' },
+  { href: '/lawn-care-calendar/', label: 'Calendar' }
+];
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#173f2c" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:type" content={type} />
+  <meta property="og:site_name" content="Grass Whisperer" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={socialImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={socialImage} />
+  {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Grass Whisperer home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>Grass<br/><strong>Whisperer</strong></span>
+    </a>
+    <nav aria-label="Main navigation">
+      {nav.map((item) => <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>)}
+    </nav>
+    <button class="menu-button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+  </header>
+  <div id="mobile-nav" class="mobile-nav" hidden>
+    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+  </div>
+  <main id="main-content"><slot /></main>
+  <footer>
+    <div class="footer-main">
+      <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>Grass<br/><strong>Whisperer</strong></span></a><p>Clear, climate-aware lawn care for gardens across the UK.</p></div>
+      <div><h2>Learn</h2><a href="/guides/grass-seed/">Grass seed</a><a href="/guides/fertiliser/">Fertiliser</a><a href="/guides/watering/">Watering</a><a href="/guides/levelling-a-lawn/">Levelling</a></div>
+      <div><h2>More</h2><a href="/guides/mowing/">Mowing</a><a href="/guides/aeration-and-compaction/">Aeration</a><a href="/lawn-care-calendar/">Care calendar</a><a href="/about/">About this site</a></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} Grass Whisperer</span><span>Observe first. Treat second.</span></div>
+  </footer>
+  <script>
+    const button = document.querySelector('.menu-button');
+    const menu = document.querySelector('#mobile-nav');
+    button?.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      if (menu instanceof HTMLElement) menu.hidden = open;
+    });
+  </script>
+</body>
+</html>

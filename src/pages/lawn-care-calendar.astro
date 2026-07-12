@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const description='A month-by-month UK lawn-care calendar covering mowing, feeding, aeration, seeding, watering and winter protection.';
+const months: [string, [string, string][]][] = [
+['January',[['Protect the surface','Keep off frosted or waterlogged grass; footprints can damage frozen leaves and compact saturated soil.'],['Clear debris','Remove fallen branches and leaf mats when conditions are firm enough.']]],
+['February',[['Prepare, do not rush','Service the mower and sharpen blades. Growth may restart in mild areas, but soil conditions decide.'],['Check drainage','Note standing water and plan remedial work for a suitable window.']]],
+['March',[['First cuts','Mow high on a dry day once growth is clearly active; reduce height gradually.'],['Light repairs','Rake local debris and repair small bare patches when soil is warm enough.']]],
+['April',[['Build density','Mow regularly, following the one-third rule. Apply spring feed only to growing, moist turf.'],['Edge and inspect','Define edges and check for compaction, moss and emerging weeds before treatment.']]],
+['May',[['Peak mowing','Frequency often increases. Keep blades sharp and alternate direction.'],['Seed while moist','Overseed thin areas if irrigation is available and temperatures are favourable.']]],
+['June',[['Raise the cut','Add height as weather dries to protect the crown and shade soil.'],['Water wisely','Water established turf deeply only after signs of stress, subject to restrictions.']]],
+['July',[['Prioritise survival','Accept dormancy during drought; avoid high-nitrogen feed on stressed grass.'],['Keep traffic moving','Move furniture and paddling pools to prevent prolonged shading and wear.']]],
+['August',[['Plan renovation','Order seed and topdressing; inspect levels and decide where hollow-tining is justified.'],['Watch moisture','Late-month rain may restart growth, but do not force recovery with excessive feed.']]],
+['September',[['Best repair window','Warm soil and cooler air favour scarifying, aeration, overseeding and levelling.'],['Autumn nutrition','Use an appropriate lower-nitrogen autumn feed if needed.']]],
+['October',[['Manage leaves','Remove leaves frequently so grass retains light and airflow.'],['Final renovations','Complete lighter work early enough for grass to recover before cold conditions.']]],
+['November',[['Slow the schedule','Mow only when conditions and growth justify it, usually at a higher setting.'],['Stay off wet soil','Avoid routine traffic and heavy machinery on saturated ground.']]],
+['December',[['Rest and observe','Clear leaves and note drainage, shade and wear patterns for next year.'],['Maintain tools','Clean, service and store equipment safely.']]]
+];
+const schema={'@context':'https://schema.org','@type':'Article',headline:'UK lawn-care calendar',description,inLanguage:'en-GB',dateModified:'2026-07-13',author:{'@type':'Organization',name:'Grass Whisperer'}};
+---
+<BaseLayout title="UK lawn-care calendar" {description} structuredData={schema}><header class="calendar-hero"><div class="container"><span class="eyebrow">January to December</span><h1>Your year on the lawn.</h1><p>A practical rhythm for UK gardens. Conditions vary by region and year, so treat each month as a prompt—not a deadline.</p></div></header><section class="calendar"><div class="container">{months.map(([month,tasks])=><article class="month"><h2>{month}</h2><div class="month-tasks">{tasks.map(([title,text])=><div class="month-task"><strong>{title}</strong><p>{text}</p></div>)}</div></article>)}</div></section></BaseLayout>
