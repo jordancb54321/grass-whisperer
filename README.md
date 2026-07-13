@@ -1,6 +1,6 @@
 # Grass Whisperer
 
-A fast, accessible and search-engine-friendly UK lawn-care website for [grasswhisperer.uk](https://grasswhisperer.uk), built with Astro and designed for Cloudflare Pages.
+A fast, accessible and search-engine-friendly UK lawn-care website for [grasswhisperer.uk](https://grasswhisperer.uk), built with Astro and deployed as static assets on Cloudflare Workers.
 
 ## Local development
 
@@ -18,16 +18,21 @@ npm run preview
 
 The static production output is written to `dist/`.
 
-## Cloudflare Pages
+## Cloudflare Worker deployment
 
-Connect this GitHub repository in **Workers & Pages → Create → Pages → Connect to Git**.
+The Worker configuration in `wrangler.jsonc` serves the generated `dist/` directory through Cloudflare's static-assets binding. It also owns the custom domains and redirects `www` to the apex domain.
 
-- Framework preset: `Astro`
-- Build command: `npm run build`
-- Build output directory: `dist`
-- Node version: `24` (or any version matching `package.json`)
+```sh
+npx wrangler login
+npm run deploy
+```
 
-Add `grasswhisperer.uk` as the custom domain in the Pages project. Because DNS is already on Cloudflare, Cloudflare can create the required records and certificate automatically.
+Production domains:
+
+- `https://grasswhisperer.uk`
+- `https://www.grasswhisperer.uk` → apex redirect
+
+The separate `grass-whisperer.pages.dev` deployment remains available as a preview, but production traffic is handled by the `grass-whisperer-site` Worker.
 
 ## SEO included
 

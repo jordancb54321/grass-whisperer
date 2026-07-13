@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "grass-whisperer-site",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-07-12",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": true
+  },
+  "routes": [
+    {
+      "pattern": "grasswhisperer.uk",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.grasswhisperer.uk",
+      "custom_domain": true
+    }
+  ]
+}
