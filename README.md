@@ -18,6 +18,10 @@ npm run preview
 
 The static production output is written to `dist/`.
 
+## Brand and design system
+
+The visual identity, design tokens, voice, photography rules and component guidance are documented in [`DESIGN.md`](./DESIGN.md). Treat it as the source of truth for future interface changes.
+
 ## Cloudflare Worker deployment
 
 The Worker configuration in `wrangler.jsonc` serves the generated `dist/` directory through Cloudflare's static-assets binding. It also owns the custom domains and redirects `www` to the apex domain.

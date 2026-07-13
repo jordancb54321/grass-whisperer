@@ -8,6 +8,6 @@ const { guide, index } = Astro.props as { guide: Guide; index: number };
     <span class="guide-meta">{guide.eyebrow}</span>
     <h3>{guide.shortTitle}</h3>
   </div>
-  <p>{guide.description}</p>
+  <div class="guide-summary"><p>{guide.description}</p><span>{guide.readTime}</span></div>
   <span class="guide-arrow" aria-hidden="true">↗</span>
 </a>

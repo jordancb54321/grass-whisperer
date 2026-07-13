@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { guides } from '../../data/guides';
+import { problemRoutes } from '../../data/navigation';
+
+const description = 'Browse practical UK lawn-care guides by job or symptom, including grass types, seed, fertiliser, watering, levelling, mowing and aeration.';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'UK lawn-care guides',
+  description,
+  url: 'https://grasswhisperer.uk/guides/',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: guides.map((guide, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: guide.title,
+      url: `https://grasswhisperer.uk/guides/${guide.slug}/`
+    }))
+  }
+};
+---
+<BaseLayout title="UK lawn-care guide library" {description} {structuredData}>
+  <header class="library-hero">
+    <div class="container library-hero-grid">
+      <div><span class="eyebrow">Grass Whisperer library</span><h1>Practical lawn care, indexed properly.</h1></div>
+      <div><p>Start with a job if you know what needs doing. Start with a symptom if you do not. Every guide is written for British conditions and explains when the usual advice does not apply.</p><a class="button" href="#symptoms">Start with a symptom</a></div>
+    </div>
+  </header>
+
+  <section class="library-guides" aria-labelledby="jobs-heading">
+    <div class="container">
+      <div class="section-head compact">
+        <div><span class="eyebrow">Browse by job</span><h2 id="jobs-heading">The complete guide library.</h2></div>
+        <p>Seven focused guides cover the jobs that make the largest difference to a home lawn.</p>
+      </div>
+      <div class="guide-list">{guides.map((guide,index)=><GuideCard {guide} {index}/>)}</div>
+    </div>
+  </section>
+
+  <section class="library-symptoms" id="symptoms" aria-labelledby="symptoms-heading">
+    <div class="container">
+      <div class="section-head compact">
+        <div><span class="eyebrow">Browse by symptom</span><h2 id="symptoms-heading">Start with the thing that looks wrong.</h2></div>
+        <p>Several problems can look alike. These routes take you to the first useful checks, not a guaranteed diagnosis.</p>
+      </div>
+      <div class="problem-list">
+        {problemRoutes.map((route, index) =>
+          <a href={route.href}>
+            <span class="problem-number">{String(index + 1).padStart(2, '0')}</span>
+            <div><h3>{route.symptom}</h3><p>{route.detail}</p></div>
+            <strong>{route.action}<span aria-hidden="true"> ↗</span></strong>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="library-calendar">
+    <div class="container library-calendar-grid">
+      <div><span class="eyebrow">Not sure when to begin?</span><h2>Check the season, then check the ground.</h2></div>
+      <div><p>The calendar gives each month a sensible focus, but temperature, rainfall and soil condition decide whether the job should go ahead.</p><a class="button" href="/lawn-care-calendar/">Open the UK lawn calendar</a></div>
+    </div>
+  </section>
+</BaseLayout>

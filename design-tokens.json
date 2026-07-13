@@ -1,0 +1,291 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "A calm British lawn field guide with editorial authority, documentary photography and practical language.",
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.09,
+          0.247,
+          0.173
+        ],
+        "hex": "#173f2c"
+      }
+    },
+    "forest-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.063,
+          0.18,
+          0.129
+        ],
+        "hex": "#102e21"
+      }
+    },
+    "moss": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.141,
+          0.345,
+          0.247
+        ],
+        "hex": "#24583f"
+      }
+    },
+    "grass": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.847,
+          0.922,
+          0.467
+        ],
+        "hex": "#d8eb77"
+      }
+    },
+    "signal": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.702,
+          0.227,
+          0.169
+        ],
+        "hex": "#b33a2b"
+      }
+    },
+    "signal-hover": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.561,
+          0.173,
+          0.129
+        ],
+        "hex": "#8f2c21"
+      }
+    },
+    "paper": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.945,
+          0.937,
+          0.898
+        ],
+        "hex": "#f1efe5"
+      }
+    },
+    "paper-muted": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.89,
+          0.886,
+          0.843
+        ],
+        "hex": "#e3e2d7"
+      }
+    },
+    "white": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.996,
+          0.973
+        ],
+        "hex": "#fffef8"
+      }
+    },
+    "ink": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.094,
+          0.192,
+          0.149
+        ],
+        "hex": "#183126"
+      }
+    },
+    "muted": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.337,
+          0.392,
+          0.353
+        ],
+        "hex": "#56645a"
+      }
+    },
+    "line": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.733,
+          0.773,
+          0.737
+        ],
+        "hex": "#bbc5bc"
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "xs": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "xl": {
+      "$value": {
+        "value": 40,
+        "unit": "px"
+      }
+    },
+    "section": {
+      "$value": {
+        "value": 104,
+        "unit": "px"
+      }
+    }
+  },
+  "rounded": {
+    "$type": "dimension",
+    "none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      }
+    },
+    "small": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
+    "image": {
+      "$value": {
+        "value": 14,
+        "unit": "px"
+      }
+    }
+  },
+  "typography": {
+    "display-xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Newsreader",
+        "fontSize": {
+          "value": 6.25,
+          "unit": "rem"
+        },
+        "fontWeight": 600,
+        "letterSpacing": {
+          "value": -0.05,
+          "unit": "em"
+        }
+      }
+    },
+    "heading-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Newsreader",
+        "fontSize": {
+          "value": 4.25,
+          "unit": "rem"
+        },
+        "fontWeight": 600,
+        "letterSpacing": {
+          "value": -0.04,
+          "unit": "em"
+        }
+      }
+    },
+    "heading-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Newsreader",
+        "fontSize": {
+          "value": 2.75,
+          "unit": "rem"
+        },
+        "fontWeight": 600,
+        "letterSpacing": {
+          "value": -0.03,
+          "unit": "em"
+        }
+      }
+    },
+    "body-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "DM Sans",
+        "fontSize": {
+          "value": 1.125,
+          "unit": "rem"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "body-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "DM Sans",
+        "fontSize": {
+          "value": 1,
+          "unit": "rem"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "label": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "DM Sans",
+        "fontSize": {
+          "value": 0.6875,
+          "unit": "rem"
+        },
+        "fontWeight": 700,
+        "letterSpacing": {
+          "value": 0.14,
+          "unit": "em"
+        }
+      }
+    }
+  }
+}

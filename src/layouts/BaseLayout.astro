@@ -6,10 +6,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 const fullTitle = title === 'Grass Whisperer' ? title : `${title} | Grass Whisperer`;
 const nav = [
-  { href: '/guides/grass-seed/', label: 'Seed' }, { href: '/guides/fertiliser/', label: 'Feeding' },
-  { href: '/guides/watering/', label: 'Watering' }, { href: '/guides/levelling-a-lawn/', label: 'Levelling' },
-  { href: '/lawn-care-calendar/', label: 'Calendar' }
+  { href: '/guides/', label: 'Guides' },
+  { href: '/lawn-care-calendar/', label: 'Calendar' },
+  { href: '/about/', label: 'About' }
 ];
+const isCurrent = (href: string) => Astro.url.pathname === href || (href === '/guides/' && Astro.url.pathname.startsWith('/guides/'));
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -43,18 +44,20 @@ const nav = [
       <span>Grass<br/><strong>Whisperer</strong></span>
     </a>
     <nav aria-label="Main navigation">
-      {nav.map((item) => <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>)}
+      {nav.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+      <a class="nav-action" href="/guides/#symptoms">Start here</a>
     </nav>
     <button class="menu-button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
   </header>
   <div id="mobile-nav" class="mobile-nav" hidden>
     {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    <a class="nav-action" href="/guides/#symptoms">Start here</a>
   </div>
   <main id="main-content"><slot /></main>
   <footer>
     <div class="footer-main">
       <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>Grass<br/><strong>Whisperer</strong></span></a><p>Clear, climate-aware lawn care for gardens across the UK.</p></div>
-      <div><h2>Learn</h2><a href="/guides/grass-seed/">Grass seed</a><a href="/guides/fertiliser/">Fertiliser</a><a href="/guides/watering/">Watering</a><a href="/guides/levelling-a-lawn/">Levelling</a></div>
+      <div><h2>Learn</h2><a href="/guides/uk-lawn-grass-types/">Grass types</a><a href="/guides/grass-seed/">Grass seed</a><a href="/guides/fertiliser/">Fertiliser</a><a href="/guides/watering/">Watering</a><a href="/guides/levelling-a-lawn/">Levelling</a></div>
       <div><h2>More</h2><a href="/guides/mowing/">Mowing</a><a href="/guides/aeration-and-compaction/">Aeration</a><a href="/lawn-care-calendar/">Care calendar</a><a href="/about/">About this site</a><a href="/photo-credits/">Photo credits</a></div>
     </div>
     <div class="footer-bottom"><span>© {new Date().getFullYear()} Grass Whisperer</span><span>Observe first. Treat second.</span></div>
