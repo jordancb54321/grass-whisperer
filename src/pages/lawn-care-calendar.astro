@@ -1,20 +1,66 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const description='A month-by-month UK lawn-care calendar covering mowing, feeding, aeration, seeding, watering and winter protection.';
-const months: [string, [string, string][]][] = [
-['January',[['Protect the surface','Keep off frosted or waterlogged grass; footprints can damage frozen leaves and compact saturated soil.'],['Clear debris','Remove fallen branches and leaf mats when conditions are firm enough.']]],
-['February',[['Prepare, do not rush','Service the mower and sharpen blades. Growth may restart in mild areas, but soil conditions decide.'],['Check drainage','Note standing water and plan remedial work for a suitable window.']]],
-['March',[['First cuts','Mow high on a dry day once growth is clearly active; reduce height gradually.'],['Light repairs','Rake local debris and repair small bare patches when soil is warm enough.']]],
-['April',[['Build density','Mow regularly, following the one-third rule. Apply spring feed only to growing, moist turf.'],['Edge and inspect','Define edges and check for compaction, moss and emerging weeds before treatment.']]],
-['May',[['Peak mowing','Frequency often increases. Keep blades sharp and alternate direction.'],['Seed while moist','Overseed thin areas if irrigation is available and temperatures are favourable.']]],
-['June',[['Raise the cut','Add height as weather dries to protect the crown and shade soil.'],['Water wisely','Water established turf deeply only after signs of stress, subject to restrictions.']]],
-['July',[['Prioritise survival','Accept dormancy during drought; avoid high-nitrogen feed on stressed grass.'],['Keep traffic moving','Move furniture and paddling pools to prevent prolonged shading and wear.']]],
-['August',[['Plan renovation','Order seed and topdressing; inspect levels and decide where hollow-tining is justified.'],['Watch moisture','Late-month rain may restart growth, but do not force recovery with excessive feed.']]],
-['September',[['Best repair window','Warm soil and cooler air favour scarifying, aeration, overseeding and levelling.'],['Autumn nutrition','Use an appropriate lower-nitrogen autumn feed if needed.']]],
-['October',[['Manage leaves','Remove leaves frequently so grass retains light and airflow.'],['Final renovations','Complete lighter work early enough for grass to recover before cold conditions.']]],
-['November',[['Slow the schedule','Mow only when conditions and growth justify it, usually at a higher setting.'],['Stay off wet soil','Avoid routine traffic and heavy machinery on saturated ground.']]],
-['December',[['Rest and observe','Clear leaves and note drainage, shade and wear patterns for next year.'],['Maintain tools','Clean, service and store equipment safely.']]]
+
+type ProductPrompt = { name: string; advice: string };
+type Task = { title: string; text: string; product?: ProductPrompt };
+type Month = { name: string; tasks: Task[] };
+
+const description = 'A month-by-month UK lawn-care calendar covering mowing, feeding, aeration, seeding, watering and product choices.';
+const months: Month[] = [
+  { name: 'January', tasks: [
+    { title: 'Protect the surface', text: 'Keep off frosted or waterlogged grass; footprints can damage frozen leaves and compact saturated soil.' },
+    { title: 'Clear debris', text: 'Remove fallen branches and leaf mats when conditions are firm enough. No fertiliser is needed while grass is dormant.' },
+  ] },
+  { name: 'February', tasks: [
+    { title: 'Prepare, do not rush', text: 'Service the mower and sharpen blades. Growth may restart in mild areas, but soil conditions decide.' },
+    { title: 'Check drainage', text: 'Note standing water and plan remedial work for a suitable window. Avoid feeding cold, saturated turf.' },
+  ] },
+  { name: 'March', tasks: [
+    { title: 'First cuts', text: 'Mow high on a dry day once growth is clearly active; reduce height gradually.' },
+    { title: 'Feed only active turf', text: 'If the lawn is growing and the soil is moist rather than waterlogged, a measured spring feed can support recovery after winter.', product: { name: 'Spring lawn fertiliser', advice: 'Choose a lawn feed with nitrogen as the main nutrient. Follow the pack rate; do not apply to drought-stressed, frozen or saturated grass.' } },
+  ] },
+  { name: 'April', tasks: [
+    { title: 'Build density', text: 'Mow regularly, following the one-third rule. Apply spring feed only to growing, moist turf.' },
+    { title: 'Edge and inspect', text: 'Define edges and check for compaction, moss and emerging weeds before choosing a treatment.' },
+  ] },
+  { name: 'May', tasks: [
+    { title: 'Peak mowing', text: 'Frequency often increases. Keep blades sharp and alternate direction.' },
+    { title: 'Maintain, do not force growth', text: 'A second feed is optional, not automatic. Use it only where a growing lawn is pale or thin and moisture is available.', product: { name: 'Slow-release lawn fertiliser', advice: 'A controlled-release spring or summer lawn fertiliser is preferable to repeated quick, high-nitrogen doses.' } },
+  ] },
+  { name: 'June', tasks: [
+    { title: 'Raise the cut', text: 'Add height as weather dries to protect the crown and shade soil.' },
+    { title: 'Water wisely', text: 'Water established turf deeply only after signs of stress, subject to restrictions. Do not use fertiliser to compensate for drought.' },
+  ] },
+  { name: 'July', tasks: [
+    { title: 'Prioritise survival', text: 'Accept dormancy during drought; avoid high-nitrogen feed on stressed grass.' },
+    { title: 'Keep traffic moving', text: 'Move furniture and paddling pools to prevent prolonged shading and wear.' },
+  ] },
+  { name: 'August', tasks: [
+    { title: 'Plan renovation', text: 'Order seed and topdressing; inspect levels and decide where hollow-tining is justified.', product: { name: 'Lawn seed and compatible topdressing', advice: 'Choose seed that matches the lawn’s light and wear. Use a blended topdressing suited to the existing soil, not sharp sand alone.' } },
+    { title: 'Watch moisture', text: 'Late-month rain may restart growth, but do not force recovery with excessive feed.' },
+  ] },
+  { name: 'September', tasks: [
+    { title: 'Best repair window', text: 'Warm soil and cooler air favour scarifying, aeration, overseeding and levelling.', product: { name: 'Lawn seed', advice: 'Use a compatible overseeding mix after preparing bare areas. Keep the surface consistently damp until seedlings establish.' } },
+    { title: 'Autumn nutrition', text: 'Use an appropriate lower-nitrogen autumn feed only if the lawn needs it and conditions allow.', product: { name: 'Autumn lawn fertiliser', advice: 'Choose a lower-nitrogen feed with relatively more potassium. Apply at the label rate to actively growing, moist turf.' } },
+  ] },
+  { name: 'October', tasks: [
+    { title: 'Manage leaves', text: 'Remove leaves frequently so grass retains light and airflow.' },
+    { title: 'Finish lightly', text: 'Complete lighter renovation work early enough for grass to recover before cold conditions. Do not add a late feed to grass that has stopped growing.' },
+  ] },
+  { name: 'November', tasks: [
+    { title: 'Slow the schedule', text: 'Mow only when conditions and growth justify it, usually at a higher setting.' },
+    { title: 'Stay off wet soil', text: 'Avoid routine traffic and heavy machinery on saturated ground. No routine fertiliser is needed.' },
+  ] },
+  { name: 'December', tasks: [
+    { title: 'Rest and observe', text: 'Clear leaves and note drainage, shade and wear patterns for next year.' },
+    { title: 'Maintain tools', text: 'Clean, service and store equipment safely.' },
+  ] },
 ];
-const schema={'@context':'https://schema.org','@type':'Article',headline:'UK lawn-care calendar',description,inLanguage:'en-GB',dateModified:'2026-07-13',author:{'@type':'Organization',name:'Grass Whisperer'}};
+
+const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: 'UK lawn-care calendar', description, inLanguage: 'en-GB', dateModified: '2026-07-13', author: { '@type': 'Organization', name: 'Grass Whisperer' } };
 ---
-<BaseLayout title="UK lawn-care calendar" {description} structuredData={schema}><header class="calendar-hero"><div class="container"><span class="eyebrow">January to December</span><h1>Your year on the lawn.</h1><p>A practical rhythm for UK gardens. Conditions vary by region and year, so treat each month as a prompt—not a deadline.</p></div></header><section class="calendar"><div class="container">{months.map(([month,tasks])=><article class="month" id={month.toLowerCase()}><h2>{month}</h2><div class="month-tasks">{tasks.map(([title,text])=><div class="month-task"><strong>{title}</strong><p>{text}</p></div>)}</div></article>)}</div></section></BaseLayout>
+<BaseLayout title="UK lawn-care calendar" {description} structuredData={schema}>
+  <header class="calendar-hero"><div class="container"><span class="eyebrow">January to December</span><h1>Your year on the lawn.</h1><p>A practical rhythm for UK gardens. Conditions vary by region and year, so treat each month as a prompt—not a deadline.</p></div></header>
+  <section class="calendar-intro"><div class="container"><span class="eyebrow">Use products with a reason</span><h2>Product prompts, not a shopping list.</h2><p>Feed, seed and soil products work best when they answer a visible need. Check growth, moisture, light and soil first; then use the product label as the final word on rate and safety.</p><aside class="calendar-note"><strong>About bone meal</strong><p>Bone meal is not a routine lawn feed. Consider it only where a soil test or a new-lawn specification identifies a phosphorus need; established lawns should not receive phosphorus by habit.</p></aside><p class="calendar-safety">Do not fertilise drought-stressed, frozen or waterlogged turf. Keep products in their original packaging, follow the label, and keep children and pets away until the product instructions say it is safe.</p></div></section>
+  <section class="calendar"><div class="container">{months.map((month) => <article class="month" id={month.name.toLowerCase()}><h2>{month.name}</h2><div class="month-tasks">{month.tasks.map((task) => <div class="month-task"><strong>{task.title}</strong><p>{task.text}</p>{task.product && <aside class="product-prompt"><span class="eyebrow">Consider</span><h3>{task.product.name}</h3><p>{task.product.advice}</p></aside>}</div>)}</div></article>)}</div></section>
+</BaseLayout>

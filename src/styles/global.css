@@ -266,6 +266,13 @@ h2 { font-size: clamp(2.25rem, 4.5vw, 4.25rem); letter-spacing: -.04em; }
 .calendar-hero, .simple-hero { padding: 100px 0 70px; }
 .calendar-hero h1, .simple-hero h1 { max-width: 1000px; }
 .calendar-hero p, .simple-hero p { max-width: 680px; color: var(--muted); font-size: 20px; }
+.calendar-intro { padding: 0 0 55px; }
+.calendar-intro h2 { max-width: 650px; margin: 10px 0 16px; font-size: clamp(2rem, 3.8vw, 3.4rem); }
+.calendar-intro > .container > p { max-width: 780px; color: var(--muted); font-size: 17px; }
+.calendar-note { max-width: 780px; margin: 28px 0 16px; padding: 20px 24px; border-left: 5px solid var(--orange); background: #ece8d8; }
+.calendar-note strong { font: 600 23px var(--serif); }
+.calendar-note p, .calendar-safety { margin: 6px 0 0; }
+.calendar-safety { font-size: 14px !important; }
 .calendar { padding: 20px 0 110px; }
 .month { display: grid; grid-template-columns: 1fr 3fr; padding: 35px 0; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
 .month h2 { font-size: 40px; }
@@ -273,6 +280,9 @@ h2 { font-size: clamp(2.25rem, 4.5vw, 4.25rem); letter-spacing: -.04em; }
 .month-task { padding: 22px; background: var(--white); }
 .month-task strong { display: block; margin-bottom: 6px; }
 .month-task p { margin: 0; color: var(--muted); font-size: 14px; }
+.product-prompt { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); }
+.product-prompt h3 { margin: 4px 0 5px; font: 600 21px var(--serif); }
+.product-prompt p { font-size: 13px; }
 .about-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: 80px; padding: 30px 0 110px; }
 .about-grid aside { font: 600 30px/1.15 var(--serif); }
 .about-grid p { font-size: 18px; line-height: 1.75; }
