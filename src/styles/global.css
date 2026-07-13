@@ -135,6 +135,9 @@ nav a:hover, nav a[aria-current='page'] { border-color: var(--green); }
 .article-section:last-child { border: 0; }
 .article-section h2 { margin-bottom: 24px; font-size: clamp(2.2rem, 4vw, 3.3rem); }
 .article-section p { font-size: 18px; line-height: 1.75; }
+.grass-type-photo { margin: 0 0 26px; overflow: hidden; background: #d9dfd4; }
+.grass-type-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.grass-type-photo figcaption { padding: 8px 10px; background: var(--white); color: var(--muted); font-size: 11px; }
 .article-section li { margin-bottom: 10px; padding-left: 7px; }
 .tip { margin-top: 30px; padding: 24px 28px; background: var(--green); color: white; }
 .tip strong { display: block; margin-bottom: 8px; color: var(--lime); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }

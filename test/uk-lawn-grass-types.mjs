@@ -19,4 +19,16 @@ for (const heading of ['What it is', 'Pros', 'Watch-outs', 'Best conditions']) {
   assert.match(html, new RegExp(heading, 'i'), `Expected a ${heading} heading`);
 }
 
-console.log('UK lawn grass-types guide contains all required species and decision details.');
+for (const image of [
+  'grass-type-perennial-ryegrass.webp',
+  'grass-type-red-fescue.webp',
+  'grass-type-hard-fescue.webp',
+  'grass-type-browntop-bent.webp',
+  'grass-type-smooth-stalked-meadow-grass.webp',
+  'grass-type-tall-fescue.webp',
+]) {
+  assert.match(html, new RegExp(`/images/${image}`), `Expected local image ${image}`);
+}
+
+assert.equal((html.match(/class="grass-type-photo"/g) ?? []).length, 6, 'Expected one labelled photo for each grass type');
+console.log('UK lawn grass-types guide contains all required species, decision details and six labelled photographs.');
