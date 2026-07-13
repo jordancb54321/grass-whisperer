@@ -2,10 +2,12 @@
 import type { Guide } from '../data/guides';
 const { guide, index } = Astro.props as { guide: Guide; index: number };
 ---
-<a class="guide-card" href={`/guides/${guide.slug}/`} style={`--card-colour:${guide.colour}`}>
+<a class="guide-row" href={`/guides/${guide.slug}/`}>
   <span class="guide-number">{String(index + 1).padStart(2, '0')}</span>
-  <span class="guide-meta">{guide.eyebrow}</span>
-  <h3>{guide.shortTitle}</h3>
+  <div>
+    <span class="guide-meta">{guide.eyebrow}</span>
+    <h3>{guide.shortTitle}</h3>
+  </div>
   <p>{guide.description}</p>
-  <span class="text-link">Read guide <span aria-hidden="true">↗</span></span>
+  <span class="guide-arrow" aria-hidden="true">↗</span>
 </a>

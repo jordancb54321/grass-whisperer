@@ -4,14 +4,77 @@ import GuideCard from '../components/GuideCard.astro';
 import { guides } from '../data/guides';
 const description = 'Practical, independent lawn-care guidance for UK gardens: grass seed, fertiliser, watering, levelling, mowing and seasonal maintenance.';
 const structuredData = [{ '@context':'https://schema.org','@type':'WebSite', name:'Grass Whisperer', url:'https://grasswhisperer.uk/', description }, { '@context':'https://schema.org','@type':'Organization', name:'Grass Whisperer', url:'https://grasswhisperer.uk/', logo:'https://grasswhisperer.uk/favicon.svg' }];
+const fieldNotes = guides.filter(({ slug }) => ['grass-seed', 'watering', 'levelling-a-lawn'].includes(slug));
 ---
 <BaseLayout title="Practical UK Lawn-Care Guides" {description} {structuredData}>
   <section class="hero">
-    <div class="hero-copy"><span class="eyebrow">Independent UK lawn-care guides</span><h1>Read your lawn.<br/>Grow it better.</h1><p class="lede">Clear, seasonal advice for healthier grass—from choosing seed and feeding responsibly to watering deeply and fixing a bumpy surface.</p><div class="hero-actions"><a class="button" href="#guides">Explore the guides</a><a class="button secondary" href="/lawn-care-calendar/">What to do this month</a></div></div>
-    <div class="hero-art" role="img" aria-label="Illustrated cross-section of healthy grass and soil"><div class="hero-sky"></div><div class="hero-turf"></div><div class="soil-cut"><span></span><span></span><span></span></div></div>
+    <div class="hero-copy">
+      <span class="eyebrow">Lawn notes for British gardens</span>
+      <h1>A better lawn starts with a closer look.</h1>
+      <p class="lede">Practical notes on seed, soil, mowing and water. No miracle products and no rigid schedules.</p>
+      <div class="hero-actions">
+        <a class="button" href="#guides">Browse the guides</a>
+        <a class="button secondary" href="/lawn-care-calendar/">See the yearly jobs</a>
+      </div>
+    </div>
+    <figure class="hero-photo">
+      <img src="/images/hero.webp" srcset="/images/hero-640.webp 640w, /images/hero.webp 1000w" sizes="(max-width: 900px) 100vw, 55vw" alt="Curving path through a shaded lawn at the Gibberd Garden in Essex" width="1000" height="723" fetchpriority="high" />
+      <figcaption>Gibberd Garden, Essex <a href="/photo-credits/">Photo: Acabashi</a></figcaption>
+    </figure>
   </section>
-  <section class="intro-strip"><div class="container"><span class="eyebrow">The short version</span><p>A great lawn is mostly observation, consistent mowing and healthy soil—not a shed full of quick fixes.</p></div></section>
-  <section class="guide-index" id="guides"><div class="container"><div class="section-head"><div><span class="eyebrow">The lawn library</span><h2>Start with what you can see.</h2></div><p>Each guide explains what to look for, why it matters and the least complicated way to put it right. Written for the British climate and ordinary home lawns.</p></div><div class="guide-grid">{guides.map((guide,index)=><GuideCard {guide} {index}/>)}</div></div></section>
-  <section class="season"><div class="container season-grid"><div><span class="eyebrow">Right job. Right moment.</span><h2>Let the season set the pace.</h2><p>Grass responds to soil temperature, moisture and daylight—not dates printed on a bag. Use the calendar as a prompt, then check conditions outside.</p><a class="button" href="/lawn-care-calendar/">Open the annual calendar</a></div><div class="season-list"><div class="season-item"><span>01</span><div><h3>Spring — restart gently</h3><p>Resume mowing, repair winter damage and feed only after active growth begins.</p></div></div><div class="season-item"><span>02</span><div><h3>Summer — protect resilience</h3><p>Mow higher, water only when needed and accept temporary dormancy.</p></div></div><div class="season-item"><span>03</span><div><h3>Autumn — renovate</h3><p>Scarify, aerate, overseed and use warm soil to establish new roots.</p></div></div><div class="season-item"><span>04</span><div><h3>Winter — keep off the frost</h3><p>Clear leaves, avoid saturated ground and service your mower.</p></div></div></div></div></section>
-  <section class="principle"><div class="container"><span class="eyebrow">The Grass Whisperer principle</span><blockquote>Do not treat a symptom until you understand the <em>conditions beneath it.</em></blockquote><p>Moss, weeds, pale grass and puddles are clues. Improve the cause—light, soil, drainage, compaction or mowing—and the lawn becomes easier to manage.</p></div></section>
+
+  <section class="intro-strip">
+    <div class="container">
+      <span class="eyebrow">A useful rule</span>
+      <p>If the grass looks wrong, check the soil, light and mowing before reaching for another treatment.</p>
+    </div>
+  </section>
+
+  <section class="guide-index" id="guides">
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">The lawn library</span><h2>Find the job you are doing.</h2></div>
+        <p>Short guides for common lawn jobs, with enough detail to understand why a method works and when to leave the lawn alone.</p>
+      </div>
+      <div class="guide-list">{guides.map((guide,index)=><GuideCard {guide} {index}/>)}</div>
+    </div>
+  </section>
+
+  <section class="field-notes">
+    <div class="container">
+      <div class="field-notes-head"><span class="eyebrow">From the field notes</span><p>Three jobs where the detail matters more than the product.</p></div>
+      <div class="photo-stories">
+        {fieldNotes.map((guide, index) =>
+          <a class:list={['photo-story', { wide: index === 0 }]} href={`/guides/${guide.slug}/`}>
+            <img src={guide.image} alt={guide.imageAlt} width={guide.imageWidth} height={guide.imageHeight} loading="lazy" />
+            <div><span>{guide.readTime}</span><h3>{guide.title}</h3><p>{guide.intro}</p></div>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="season">
+    <div class="container season-grid">
+      <div><span class="eyebrow">Work with the weather</span><h2>The date is only a hint.</h2><p>A warm, damp September may be ideal for seed. A dry one is not. Check the soil and the forecast before following the calendar.</p><a class="button" href="/lawn-care-calendar/">Open the care calendar</a></div>
+      <div class="season-list">
+        <div class="season-item"><span>01</span><div><h3>Spring</h3><p>Restart mowing gently. Repair winter wear once growth is moving.</p></div></div>
+        <div class="season-item"><span>02</span><div><h3>Summer</h3><p>Cut higher in dry weather and let established turf rest if water is short.</p></div></div>
+        <div class="season-item"><span>03</span><div><h3>Autumn</h3><p>Warm soil makes this the best window for seed, aeration and repairs.</p></div></div>
+        <div class="season-item"><span>04</span><div><h3>Winter</h3><p>Clear leaves and keep heavy traffic off wet or frozen ground.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="diagnosis">
+    <div class="container diagnosis-grid">
+      <div><span class="eyebrow">Before you buy anything</span><h2>Four things worth checking first.</h2></div>
+      <ol>
+        <li><span>Light</span>Is the grass trying to grow in deep shade?</li>
+        <li><span>Soil</span>Is it compacted, waterlogged or bone dry below the surface?</li>
+        <li><span>Cut</span>Are the blades sharp, and are you taking too much off?</li>
+        <li><span>Use</span>Is the seed mixture suited to children, pets and regular traffic?</li>
+      </ol>
+    </div>
+  </section>
 </BaseLayout>

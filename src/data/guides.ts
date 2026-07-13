@@ -1,12 +1,15 @@
 export type GuideSection = { heading: string; paragraphs: string[]; bullets?: string[]; tip?: string };
 export type Guide = {
   slug: string; title: string; shortTitle: string; description: string; eyebrow: string;
-  readTime: string; updated: string; intro: string; colour: string; sections: GuideSection[];
+  readTime: string; updated: string; intro: string; colour: string;
+  image?: string; imageAlt?: string; imageCredit?: string;
+  imageWidth?: number; imageHeight?: number; sections: GuideSection[];
 };
 
 export const guides: Guide[] = [
   {
     slug: 'grass-seed', title: 'Choosing grass seed for a British lawn', shortTitle: 'Grass seed', eyebrow: 'Start with the right plant', readTime: '8 min read', updated: '13 July 2026', colour: '#d8eb77',
+    image: '/images/seed.webp', imageAlt: 'Close-up of seed heads on a blade of grass', imageCredit: 'Simon Heck · CC BY-SA 3.0', imageWidth: 800, imageHeight: 600,
     description: 'A practical UK guide to lawn seed mixtures, sowing rates, soil preparation and germination for hard-wearing, shaded and ornamental lawns.',
     intro: 'The best seed is not the most expensive bag. It is the mixture that matches your light, soil and the way your lawn is actually used.',
     sections: [
@@ -27,6 +30,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'watering', title: 'Watering a lawn deeply—and less often', shortTitle: 'Watering', eyebrow: 'Build deeper roots', readTime: '7 min read', updated: '13 July 2026', colour: '#8dc8c2',
+    image: '/images/watering.webp', imageAlt: 'Garden sprinkler throwing arcs of water over green plants', imageCredit: 'Kumaravel · CC BY 2.0', imageWidth: 720, imageHeight: 480,
     description: 'Learn when, how deeply and how often to water established turf and new seed in the UK while avoiding waste and shallow roots.',
     intro: 'Established lawns usually benefit from infrequent, thorough watering. New seed is the exception: it needs the surface kept damp while it germinates.',
     sections: [
@@ -37,6 +41,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'levelling-a-lawn', title: 'How to level a bumpy lawn without burying it', shortTitle: 'Levelling', eyebrow: 'Smooth, do not smother', readTime: '10 min read', updated: '13 July 2026', colour: '#d6a57a',
+    image: '/images/levelling.webp', imageAlt: 'Old metal lawn roller resting beneath trees in an Essex garden', imageCredit: 'Acabashi · CC BY-SA 4.0', imageWidth: 650, imageHeight: 975,
     description: 'A step-by-step guide to diagnosing and levelling bumps, hollows and settlement in an established lawn with topdressing or turf repair.',
     intro: 'Small ripples can be corrected gradually. Deep hollows, active subsidence and buried rubble need diagnosis before another layer of soil goes on top.',
     sections: [
@@ -47,6 +52,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'mowing', title: 'Mowing for denser, healthier grass', shortTitle: 'Mowing', eyebrow: 'The highest-impact habit', readTime: '6 min read', updated: '13 July 2026', colour: '#b7d96d',
+    image: '/images/mowing.webp', imageAlt: 'Tractor mowing a broad green lawn in the English countryside', imageCredit: 'Richard Croft · CC BY-SA 2.0', imageWidth: 640, imageHeight: 427,
     description: 'UK lawn mowing guidance covering cutting height, the one-third rule, stripes, clippings and seasonal technique.',
     intro: 'Good mowing is not about cutting as short as possible. Consistent cuts at an appropriate height encourage density and leave enough leaf to power the roots.',
     sections: [

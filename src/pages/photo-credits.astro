@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const description = 'Photography credits and Creative Commons licence information for images used by Grass Whisperer.';
+const photos = [
+  { title: 'A garden path and lawn, Gibberd Garden, Essex', creator: 'Acabashi', licence: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:A_garden_path_and_lawn_Gibberd_Garden_Essex_England.JPG' },
+  { title: 'Seeds at a blade of grass', creator: 'Simon Heck', licence: 'CC BY-SA 3.0', source: 'https://commons.wikimedia.org/wiki/File:Seeds_At_A_Blade_Of_Grass_(208817561).jpeg' },
+  { title: 'Mowing the lawn', creator: 'Richard Croft', licence: 'CC BY-SA 2.0', source: 'https://commons.wikimedia.org/wiki/File:Mowing_the_lawn_%5E_-_geograph.org.uk_-_496594.jpg' },
+  { title: 'Garden sprinkler', creator: 'Kumaravel', licence: 'CC BY 2.0', source: 'https://www.flickr.com/photos/35034347430@N01/8289465537' },
+  { title: 'Lawn roller at Easton Lodge Gardens, Essex', creator: 'Acabashi', licence: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Lawn_roller_at_Easton_Lodge_Gardens,_Little_Easton,_Essex,_England.jpg' }
+];
+---
+<BaseLayout title="Photo credits" {description}>
+  <header class="simple-hero"><div class="container"><span class="eyebrow">Photography</span><h1>Photo credits.</h1><p>The photographs on Grass Whisperer are reused under Creative Commons licences. They are stored locally and cropped for the layout; ownership remains with each photographer.</p></div></header>
+  <section class="credits"><div class="container">{photos.map((photo)=><article><div><h2>{photo.title}</h2><p>{photo.creator} · {photo.licence}</p></div><a href={photo.source} rel="external">View original ↗</a></article>)}</div></section>
+</BaseLayout>
