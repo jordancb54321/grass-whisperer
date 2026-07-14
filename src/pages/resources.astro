@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { utilityResources, videoResources, websiteResources } from '../data/resources';
+
+const description = 'A curated collection of useful UK lawn-care websites, practical YouTube videos, soil maps, weather forecasts and water-supplier information.';
+const allResources = [...websiteResources, ...videoResources, ...utilityResources];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Useful lawn-care resources',
+  description,
+  url: 'https://grasswhisperer.uk/resources/',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: allResources.map((resource, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: resource.title,
+      url: resource.url,
+    })),
+  },
+};
+---
+<BaseLayout title="Useful lawn-care resources" {description} {structuredData}>
+  <header class="resources-hero">
+    <div class="container resources-hero-grid">
+      <div><span class="eyebrow">Curated, not comprehensive</span><h1>Useful lawn-care resources.</h1></div>
+      <div><p>Good advice is easier to use when you know who produced it and what they are trying to do. These references are useful companions to the Grass Whisperer guides.</p><p class="resources-reviewed">Reviewed 13 July 2026 · No affiliate links</p></div>
+    </div>
+  </header>
+
+  <section class="resource-principles" aria-label="How resources are selected">
+    <div class="container trust-grid">
+      <div><span>01</span><strong>Relevant to UK conditions</strong><p>Climate, terminology and seasonal timing are considered.</p></div>
+      <div><span>02</span><strong>Clear about the source</strong><p>Retailers and commercial publishers are labelled.</p></div>
+      <div><span>03</span><strong>Useful beyond a product</strong><p>Each link teaches a method, condition or decision.</p></div>
+    </div>
+  </section>
+
+  <section class="resource-section" aria-labelledby="websites-heading">
+    <div class="container">
+      <div class="section-head compact">
+        <div><span class="eyebrow">Reference websites</span><h2 id="websites-heading">Good places to check the detail.</h2></div>
+        <p>Start with independent editorial or charity sources. Commercial libraries can still be useful, but read product recommendations with their business model in mind.</p>
+      </div>
+      <div class="resource-list">
+        {websiteResources.map((resource, index) =>
+          <a href={resource.url} rel="external noreferrer" class:list={['resource-row', { commercial: resource.commercial }]}>
+            <span class="resource-index">{String(index + 1).padStart(2, '0')}</span>
+            <div class="resource-name"><span>{resource.organisation}</span><h3>{resource.title}</h3></div>
+            <div class="resource-summary"><p>{resource.description}</p><span>{resource.sourceType}</span></div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="video-section" aria-labelledby="videos-heading">
+    <div class="container">
+      <div class="field-notes-head"><div><span class="eyebrow">Watch the job</span><h2 id="videos-heading">Practical video lessons.</h2></div><p>Links open on YouTube; no player or tracking is loaded here.</p></div>
+      <div class="video-resource-grid">
+        {videoResources.map((video, index) =>
+          <a class="video-resource" href={video.url} rel="external noreferrer">
+            <div class="video-resource-meta"><span>Video {String(index + 1).padStart(2, '0')}</span><span>{video.duration}</span></div>
+            <div><span class="video-channel">{video.channel}</span><h3>{video.title}</h3><p>{video.description}</p></div>
+            <strong>Watch on YouTube <span aria-hidden="true">↗</span></strong>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="utility-section" aria-labelledby="conditions-heading">
+    <div class="container utility-grid">
+      <div><span class="eyebrow">Check the conditions</span><h2 id="conditions-heading">Soil, weather and water.</h2><p>A sensible lawn job can still fail on the wrong soil or the wrong day. Check the site before following a calendar.</p></div>
+      <div class="utility-links">
+        {utilityResources.map((resource, index) =>
+          <a href={resource.url} rel="external noreferrer">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div><small>{resource.organisation}</small><h3>{resource.title}</h3><p>{resource.description}</p></div>
+            <strong aria-hidden="true">↗</strong>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="resource-policy">
+    <div class="container resource-policy-grid">
+      <div><span class="eyebrow">External resource policy</span><h2>Useful does not mean unquestioned.</h2></div>
+      <div><p>Grass Whisperer receives no commission from these external websites. Inclusion is not an endorsement of every claim, product or advert on the destination site.</p><ul><li>Commercial sources are labelled where the publisher sells lawn products or services.</li><li>Video descriptions explain why each item is included rather than relying on popularity.</li><li>External material can change after review; current product labels and local restrictions take priority.</li></ul></div>
+    </div>
+  </section>
+</BaseLayout>
