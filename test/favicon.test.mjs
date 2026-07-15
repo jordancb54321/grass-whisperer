@@ -7,7 +7,7 @@ assert.match(html, /rel="icon"[^>]+href="\/favicon-48\.png"/i);
 assert.match(html, /rel="apple-touch-icon"[^>]+href="\/apple-touch-icon\.png"/i);
 assert.match(html, /rel="manifest"[^>]+href="\/site\.webmanifest"/i);
 
-for (const path of ['../dist/favicon-48.png', '../dist/apple-touch-icon.png', '../dist/site.webmanifest']) {
+for (const path of ['../dist/favicon.ico', '../dist/favicon-48.png', '../dist/apple-touch-icon.png', '../dist/site.webmanifest']) {
   await access(new URL(path, import.meta.url));
 }
 
