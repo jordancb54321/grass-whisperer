@@ -10,6 +10,8 @@ for (const phrase of [
   'Keep the roots damp and the turf cool',
   'Lay it again promptly',
   'Avoid reusing turf that carries persistent weeds',
+  'Practical video demonstration',
+  /Lifting &(?:amp;)? Relaying Turf by Hand/i,
 ]) {
   assert.match(html, new RegExp(phrase, 'i'), `Expected reuse-turf guidance: ${phrase}`);
 }
