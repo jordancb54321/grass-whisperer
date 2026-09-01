@@ -28,6 +28,15 @@ const isCurrent = (href: string) => Astro.url.pathname === href || (href === '/g
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#173f2c" />
+  <script is:inline>
+    (() => {
+      const savedTheme = localStorage.getItem('grass-whisperer-theme');
+      const theme = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
   <meta property="og:locale" content="en_GB" />
   <meta property="og:type" content={type} />
   <meta property="og:site_name" content="Grass Whisperer" />
@@ -51,12 +60,14 @@ const isCurrent = (href: string) => Astro.url.pathname === href || (href === '/g
     <nav aria-label="Main navigation">
       {nav.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
       <a class="nav-action" href="/guides/#symptoms">Start here</a>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span aria-hidden="true">◐</span><span class="theme-toggle-label">Dark</span></button>
     </nav>
     <button class="menu-button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
   </header>
   <div id="mobile-nav" class="mobile-nav" hidden>
     {nav.map((item) => <a href={item.href}>{item.label}</a>)}
     <a class="nav-action" href="/guides/#symptoms">Start here</a>
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span aria-hidden="true">◐</span><span class="theme-toggle-label">Dark</span></button>
   </div>
   <main id="main-content"><slot /></main>
   <footer>
@@ -68,11 +79,33 @@ const isCurrent = (href: string) => Astro.url.pathname === href || (href === '/g
     <div class="footer-bottom"><span>© {new Date().getFullYear()} Grass Whisperer</span><span>Observe first. Treat second.</span></div>
   </footer>
   <script>
-    const button = document.querySelector('.menu-button');
+    const menuButton = document.querySelector('.menu-button');
     const menu = document.querySelector('#mobile-nav');
-    button?.addEventListener('click', () => {
-      const open = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!open));
+    const themeButtons = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+
+    const setTheme = (theme: 'light' | 'dark') => {
+      document.documentElement.dataset.theme = theme;
+      if (themeColor) themeColor.setAttribute('content', theme === 'dark' ? '#102e21' : '#173f2c');
+      themeButtons.forEach((button) => {
+        const isDark = theme === 'dark';
+        button.setAttribute('aria-pressed', String(isDark));
+        button.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+        const label = button.querySelector('.theme-toggle-label');
+        if (label) label.textContent = isDark ? 'Light' : 'Dark';
+      });
+    };
+
+    setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+    themeButtons.forEach((button) => button.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('grass-whisperer-theme', nextTheme);
+      setTheme(nextTheme);
+    }));
+
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
       if (menu instanceof HTMLElement) menu.hidden = open;
     });
   </script>

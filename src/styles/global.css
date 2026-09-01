@@ -438,3 +438,63 @@ footer div > a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Theme controls and the dark palette use semantic tokens so content remains legible. */
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 36px; padding: 7px 10px; border: 1px solid var(--line); background: transparent; color: inherit; cursor: pointer; font: 700 12px var(--sans); }
+.theme-toggle:hover { border-color: var(--green); background: var(--white); }
+.mobile-nav .theme-toggle { width: 100%; margin-top: 8px; border-color: #ffffff52; color: white; }
+.mobile-nav .theme-toggle:hover { border-color: var(--lime); background: #ffffff16; }
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --green: #b9e48c;
+  --green-2: #c9eda7;
+  --deep: #102e21;
+  --lime: #d8eb77;
+  --paper: #111914;
+  --white: #18241d;
+  --ink: #f0f5e9;
+  --muted: #b8c7b8;
+  --line: rgba(216, 235, 119, .22);
+  --signal: #ef8273;
+  --signal-hover: #ffab9c;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color-scheme: dark;
+    --green: #b9e48c;
+    --green-2: #c9eda7;
+    --deep: #102e21;
+    --lime: #d8eb77;
+    --paper: #111914;
+    --white: #18241d;
+    --ink: #f0f5e9;
+    --muted: #b8c7b8;
+    --line: rgba(216, 235, 119, .22);
+    --signal: #ef8273;
+    --signal-hover: #ffab9c;
+  }
+}
+
+:root { --deep: var(--green); }
+.site-header, .problem-list, .guide-list, .resource-list, .toc, .measure-steps, .standards-copy ul { border-color: var(--line); }
+.season, .library-calendar, .calculator-result, .calculator-notes, .utility-section, .photo-story, .video-resource, .tip, .menu-button, .mobile-nav { background: var(--deep); }
+
+html[data-theme='dark'] .problem-finder,
+html[data-theme='dark'] .library-symptoms,
+html[data-theme='dark'] .calculator-section,
+html[data-theme='dark'] .field-notes,
+html[data-theme='dark'] .video-section,
+html[data-theme='dark'] .related,
+html[data-theme='dark'] .guide-video,
+html[data-theme='dark'] .calendar-note,
+html[data-theme='dark'] .disclaimer { background: #162219; }
+html[data-theme='dark'] .hero-photo,
+html[data-theme='dark'] .grass-type-photo { background: #24342a; }
+html[data-theme='dark'] .unevenness-options label:has(input:checked),
+html[data-theme='dark'] .form-error { background: #3b2420; }
+html[data-theme='dark'] .field-notes-head p,
+html[data-theme='dark'] .guide-video small,
+html[data-theme='dark'] .article-photo figcaption { color: var(--muted); }
+html[data-theme='dark'] .theme-toggle:hover { background: #24342a; }
